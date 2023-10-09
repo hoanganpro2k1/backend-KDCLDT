@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { User } from './user/user.entity';
-import { DogsModule } from './dogs/dogs.module';
-import { Dog } from './dogs/entities/dog.entity';
 import { UsersModule } from './user/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
@@ -20,12 +18,11 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [User, Dog],
+        entities: [User],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
-    DogsModule,
     UsersModule,
     AuthModule,
   ],
